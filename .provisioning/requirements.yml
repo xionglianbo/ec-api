@@ -1,0 +1,10 @@
+---
+# Juwai public roles
+- src: juwai.laravel
+- src: juwai.memcached
+- src: juwai.nginx
+
+# geerlingguy public roles
+- src: geerlingguy.composer
+- src: geerlingguy.php
+- src: geerlingguy.repo-epel
