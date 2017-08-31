@@ -1,0 +1,31 @@
+---
+application_name: 'ec-admin'
+
+nginx_port: 80
+
+php_date_timezone: 'Asia/Shanghai'
+php_enable_apc: false
+php_enable_php_fpm: true
+php_enablerepo: 'amzn-main'
+php_fpm_conf_path: '/etc/php-fpm-5.6.conf'
+php_fpm_pm_max_spare_servers: 35
+php_fpm_pool_user: 'nginx'
+php_fpm_pool_group: 'nginx'
+php_fpm_pool_conf_path: '/etc/php-fpm-5.6.d/www.conf'
+php_opcache_conf_filename: '10-opcache.ini'
+php_packages:
+  - php56
+  - php56-common
+  - php56-devel
+  - php56-fpm
+  - php56-gd
+  - php56-mbstring
+  - php56-mcrypt
+  - php56-mysqlnd
+  - php56-opcache
+  - php56-pdo
+  - php56-pecl-memcached
+  - php56-xml
+php_webserver_daemon: 'nginx'
+
+timezone: 'Asia/Shanghai'

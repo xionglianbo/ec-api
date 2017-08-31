@@ -1,0 +1,37 @@
+---
+dot_env:
+    - { key: 'app_env', value: 'local' }
+    - { key: 'app_key', value: 'base64:JbzO7/YbZwm7l6ISfb3/7Mo3MBVuklBawpCt7pceDi8=' }
+    - { key: 'app_debug', value: 'true' }
+    - { key: 'app_log_level', value: 'debug' }
+    - { key: 'app_url', value: 'http://127.0.0.1:6002' }
+    - { key: 'db_connection', value: 'mysql' }
+    - { key: 'db_host', value: '127.0.0.1' }
+    - { key: 'db_username', value: 'root' }
+    - { key: 'db_password', value: 'root' }
+    - { key: 'cache_driver', value: 'memcached' }
+    - { key: 'session_driver', value: 'array' }
+    - { key: 'memcached_host', value: '127.0.0.1' }
+
+env: 'vagrant'
+
+nginx_port: 6002
+
+php_enablerepo: 'webtatic'
+php_fpm_conf_path: '/etc/php-fpm.conf'
+php_fpm_pool_conf_path: '/etc/php-fpm.d/www.conf'
+php_opcache_enable: no
+php_packages:
+  - php56w
+  - php56w-common
+  - php56w-devel
+  - php56w-fpm
+  - php56w-gd
+  - php56w-mbstring
+  - php56w-mcrypt
+  - php56w-mysqlnd
+  - php56w-opcache
+  - php56w-pdo
+  - php56w-pecl-memcached
+  - php56w-pecl-xdebug
+  - php56w-xml
