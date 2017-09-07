@@ -1,0 +1,7 @@
+---
+deploy_stage: 'staging'
+env: 'staging'
+
+php_opcache_enable: no
+
+server_name: '~^ec-api\.nuoxiangcun\.com$ ~^(?<vhost>.+)\.ec-api\.nuoxiangcun\.com$'
