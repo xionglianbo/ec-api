@@ -8,92 +8,121 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * @SWG\Get(
+	 *   path="/product",
+	 *   summary="Get all products",
+	 *   operationId="getProducts",
+	 *   @SWG\Response(response=200, description="Success"),
+	 * )
+	 */
     public function index()
     {
-        //
+        return Product::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * @SWG\Post(
+	 *   path="/product",
+	 *   summary="Add a product",
+	 *   operationId="addProduct",
+	 *   @SWG\Parameter(
+	 *     name="name",
+	 *     in="formData",
+	 *     description="Product name",
+	 *     required=true,
+	 *     type="string"
+	 *   ),
+	 *   @SWG\Parameter(
+	 *     name="description",
+	 *     in="formData",
+	 *     description="Product description",
+	 *     required=true,
+	 *     type="string"
+	 *   ),
+	 *   @SWG\Response(response=200, description="Success"),
+	 * )
+	 */
     public function store(Request $request)
     {
-        //
+        $product = Product::create($request->all());
+
+        return $product;
     }
 
 	/**
 	 * @SWG\Get(
-	 *   path="/product/{productId}",
+	 *   path="/product/{id}",
 	 *   summary="Get product by id",
 	 *   operationId="getProduct",
 	 *   @SWG\Parameter(
-	 *     name="productId",
+	 *     name="id",
 	 *     in="path",
-	 *     description="Get product by id.",
+	 *     description="Product id.",
 	 *     required=true,
 	 *     type="integer"
 	 *   ),
 	 *   @SWG\Response(response=200, description="Success"),
 	 *   @SWG\Response(response=404, description="No record")
 	 * )
-	 *
 	 */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($id);
-
-        return response()->json($product);
+        return $product;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+	/**
+	 * @SWG\Put(
+	 *   path="/product/{id}",
+	 *   summary="Update a product",
+	 *   operationId="updateProduct",
+	 *   @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     description="Product id.",
+	 *     required=true,
+	 *     type="integer"
+	 *   ),
+	 *   @SWG\Parameter(
+	 *     name="name",
+	 *     in="formData",
+	 *     description="Product name",
+	 *     required=false,
+	 *     type="string"
+	 *   ),
+	 *   @SWG\Parameter(
+	 *     name="description",
+	 *     in="formData",
+	 *     description="Product description",
+	 *     required=false,
+	 *     type="string"
+	 *   ),
+	 *   @SWG\Response(response=200, description="Success"),
+	 * )
+	 */
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+	/**
+	 * @SWG\Delete(
+	 *   path="/product/{id}",
+	 *   summary="Delete product by id",
+	 *   operationId="deleteProduct",
+	 *   @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     description="Product id.",
+	 *     required=true,
+	 *     type="integer"
+	 *   ),
+	 *   @SWG\Response(response=200, description="Success"),
+	 *   @SWG\Response(response=404, description="No record")
+	 * )
+	 */
+    public function destroy(Product $product)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $product->delete();
     }
 }
