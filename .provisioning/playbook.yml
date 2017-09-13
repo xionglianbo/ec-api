@@ -17,3 +17,68 @@
   become: yes
   roles:
     - { role: juwai.memcached,       tags: ['all', 'memcached'] }
+
+  tasks:
+    - name: Install MySQL Community YUM Repo.
+      yum: name=http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm state=installed
+      tags: mysql
+
+    - name: Install MySQL
+      yum: name=mysql-community-server state=installed
+      tags: mysql
+
+    - name: Install MySQL-python
+      yum: name=MySQL-python state=installed
+      tags: mysql
+
+    - name: Ensure MySQL is running
+      service: name=mysqld state=started enabled=yes
+      tags: mysql
+
+    - name: Ensure IPTables is not running
+      service: name=iptables state=stopped enabled=no
+      tags: mysql
+
+    - name: Update MySQL Root Password
+      mysql_user: name=root host={{ item }} password={{ mysql_root_password }}
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
+      tags: mysql
+
+    - name: Copy the my.cnf
+      template: src=my.cnf dest=/root/.my.cnf owner=root mode=0600
+      tags: mysql
+
+    - name: Create database user
+      mysql_user:
+        login_user: 'root'
+        login_password: '{{ mysql_root_password }}'
+        name: 'xiong'
+        password: 'password'
+        host: '{{ item }}'
+        priv: '*.*:ALL'
+      with_items:
+        - '%'
+        - 'localhost'
+      tags: 'mysql'
+
+    - name: Create ec database
+      mysql_db:
+        login_user: 'root'
+        login_password: '{{ mysql_root_password }}'
+        name: 'ec'
+        state: 'present'
+        encoding: 'utf8'
+        collation: 'utf8_general_ci'
+      tags: mysql'
+
+    - name: Run database migrations
+      command: 'php artisan migrate'
+      args:
+        chdir: '/vagrant'
+      register: migration_result
+      changed_when: migration_result.stdout != 'Nothing to migrate.'
+      ignore_errors: yes
+      tags:
