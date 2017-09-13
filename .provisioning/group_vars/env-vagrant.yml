@@ -6,7 +6,7 @@ dot_env:
     - { key: 'app_log_level', value: 'debug' }
     - { key: 'app_url', value: 'http://127.0.0.1:6002' }
     - { key: 'db_connection', value: 'mysql' }
-    - { key: 'db_host', value: '127.0.0.1' }
+    - { key: 'db_host', value: '192.168.111.2' }
     - { key: 'db_database', value: 'ec' }
     - { key: 'db_username', value: 'xiong' }
     - { key: 'db_password', value: 'password' }
