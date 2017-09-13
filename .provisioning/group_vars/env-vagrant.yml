@@ -7,13 +7,17 @@ dot_env:
     - { key: 'app_url', value: 'http://127.0.0.1:6002' }
     - { key: 'db_connection', value: 'mysql' }
     - { key: 'db_host', value: '127.0.0.1' }
-    - { key: 'db_username', value: 'root' }
-    - { key: 'db_password', value: 'root' }
+    - { key: 'db_database', value: 'ec' }
+    - { key: 'db_username', value: 'xiong' }
+    - { key: 'db_password', value: 'password' }
     - { key: 'cache_driver', value: 'memcached' }
     - { key: 'session_driver', value: 'array' }
     - { key: 'memcached_host', value: '127.0.0.1' }
+    - { key: 'l5_swagger_generate_always', value: 'true' }
 
 env: 'vagrant'
+
+mysql_root_password: 'password'
 
 nginx_port: 6002
 
